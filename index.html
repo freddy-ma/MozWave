@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MozWave Maputo – Serviços de Informática, Web, Marketing Digital, Gadgets e muito mais em Maputo, Moçambique." />
+  <meta name="keywords" content="informática maputo, websites moçambique, marketing digital maputo, reparação computadores, gadgets maputo" />
+  <meta name="author" content="MozWave Maputo" />
+  <meta property="og:title" content="MozWave Maputo – Tecnologia para o seu Negócio" />
+  <meta property="og:description" content="Serviços digitais, informática, web e gadgets em Maputo." />
+  <title>MozWave Maputo – Tecnologia para o seu Negócio</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Syne (display) + Outfit (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:    '#0D1B2A',
+            navymid: '#112236',
+            blue:    '#0077B6',
+            cyan:    '#00B4D8',
+            wapp:    '#25D366',
+          },
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            body:    ['Outfit', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ─── ROOT & RESET ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: #0D1B2A;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+
+    /* ─── SCROLLBAR ─────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0D1B2A; }
+    ::-webkit-scrollbar-thumb { background: #0077B6; border-radius: 3px; }
+
+    /* ─── SELECTION ─────────────────────────────────────────────── */
+    ::selection { background: #0077B6; color: #fff; }
+
+    /* ─── NOISE TEXTURE OVERLAY ─────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    /* ─── NAVBAR ─────────────────────────────────────────────────── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+    }
+    #navbar.scrolled {
+      background: rgba(13, 27, 42, 0.92);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 2px 30px rgba(0,0,0,0.5);
+    }
+    .nav-link {
+      position: relative;
+      font-weight: 500;
+      font-size: 0.875rem;
+      letter-spacing: 0.04em;
+      color: #94a3b8;
+      transition: color 0.3s;
+      padding-bottom: 2px;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, #0077B6, #00B4D8);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ─── HERO ───────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,119,182,0.22) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(0,180,216,0.12) 0%, transparent 60%),
+        linear-gradient(135deg, #0D1B2A 0%, #112236 50%, #0D1B2A 100%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(0,119,182,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,119,182,0.08) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+    .hero-orb-1 { width: 520px; height: 520px; right: -100px; top: -100px; background: radial-gradient(circle, rgba(0,119,182,0.35) 0%, transparent 70%); animation-delay: 0s; }
+    .hero-orb-2 { width: 300px; height: 300px; left: 5%; bottom: 10%; background: radial-gradient(circle, rgba(0,180,216,0.2) 0%, transparent 70%); animation-delay: 3s; }
+    @keyframes orbFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+
+    /* ─── BADGE ──────────────────────────────────────────────────── */
+    .badge-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(0,119,182,0.15);
+      border: 1px solid rgba(0,180,216,0.3);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #00B4D8;
+      font-weight: 600;
+    }
+    .badge-dot {
+      width: 7px; height: 7px;
+      background: #00B4D8;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* ─── CTA BUTTONS ────────────────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, #0077B6, #00B4D8);
+      color: #fff; font-weight: 600; font-size: 0.95rem;
+      padding: 14px 32px; border-radius: 12px;
+      border: none; cursor: pointer;
+      box-shadow: 0 4px 24px rgba(0,119,182,0.4);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+      text-decoration: none;
+      position: relative; overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #00B4D8, #0077B6);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,119,182,0.5); }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary span { position: relative; z-index: 1; }
+    .btn-primary i { position: relative; z-index: 1; transition: transform 0.3s; }
+    .btn-primary:hover i { transform: translateX(4px); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent;
+      color: #94a3b8; font-weight: 500; font-size: 0.95rem;
+      padding: 14px 24px; border-radius: 12px;
+      border: 1px solid rgba(148,163,184,0.2);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .btn-ghost:hover { color: #fff; border-color: rgba(0,180,216,0.5); background: rgba(0,119,182,0.1); }
+
+    /* ─── STATS ──────────────────────────────────────────────────── */
+    .stat-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 20px 24px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .stat-card:hover { border-color: rgba(0,180,216,0.3); transform: translateY(-3px); }
+
+    /* ─── SECTION TITLES ─────────────────────────────────────────── */
+    .section-tag {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #00B4D8;
+      background: rgba(0,180,216,0.1);
+      border: 1px solid rgba(0,180,216,0.25);
+      border-radius: 6px;
+      padding: 4px 12px;
+      margin-bottom: 12px;
+    }
+
+    /* ─── CATEGORY FILTERS ───────────────────────────────────────── */
+    .filter-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 20px; border-radius: 100px;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em;
+      cursor: pointer; border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: #94a3b8;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .filter-btn:hover { border-color: rgba(0,180,216,0.4); color: #fff; background: rgba(0,119,182,0.15); }
+    .filter-btn.active {
+      background: linear-gradient(135deg, #0077B6, #00B4D8);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(0,119,182,0.4);
+    }
+
+    /* ─── CARDS ──────────────────────────────────────────────────── */
+    .service-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform 0.35s cubic-bezier(.23,1,.32,1), box-shadow 0.35s ease, border-color 0.35s ease;
+      position: relative;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,180,216,0.5), transparent);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .service-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,180,216,0.2); border-color: rgba(0,180,216,0.3); }
+    .service-card:hover::before { opacity: 1; }
+
+    .card-img-wrap {
+      position: relative; overflow: hidden; height: 200px;
+    }
+    .card-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s cubic-bezier(.23,1,.32,1), filter 0.4s ease;
+      filter: brightness(0.85) saturate(1.1);
+    }
+    .service-card:hover .card-img-wrap img { transform: scale(1.07); filter: brightness(0.95) saturate(1.2); }
+
+    .card-category-badge {
+      position: absolute; top: 12px; left: 12px;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 6px;
+      backdrop-filter: blur(10px);
+    }
+
+    .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .card-title { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; color: #f1f5f9; margin-bottom: 8px; line-height: 1.3; }
+    .card-desc { font-size: 0.82rem; color: #94a3b8; line-height: 1.6; margin-bottom: 16px; flex: 1; }
+    .card-price {
+      font-size: 1.3rem; font-weight: 700; color: #00B4D8;
+      font-family: 'Syne', sans-serif;
+      margin-bottom: 16px;
+    }
+    .card-price small { font-size: 0.65rem; font-weight: 500; color: #64748b; font-family: 'Outfit', sans-serif; margin-left: 4px; }
+
+    .btn-whatsapp {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: linear-gradient(135deg, #128C7E, #25D366);
+      color: #fff; font-weight: 600; font-size: 0.82rem;
+      padding: 11px 18px; border-radius: 10px;
+      border: none; cursor: pointer; width: 100%;
+      transition: transform 0.25s, box-shadow 0.25s, filter 0.25s;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.25);
+    }
+    .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.4); filter: brightness(1.08); }
+    .btn-whatsapp i { font-size: 0.9rem; }
+
+    /* ─── CARD HIDDEN / VISIBLE ──────────────────────────────────── */
+    .card-item { transition: opacity 0.35s ease, transform 0.35s ease; }
+    .card-item.hidden { display: none; }
+
+    /* ─── HOW IT WORKS ───────────────────────────────────────────── */
+    .step-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      padding: 32px 28px;
+      text-align: center;
+      position: relative;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .step-card:hover { border-color: rgba(0,180,216,0.3); transform: translateY(-4px); }
+    .step-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 3.5rem; font-weight: 800;
+      color: rgba(0,180,216,0.12);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .step-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, rgba(0,119,182,0.3), rgba(0,180,216,0.15));
+      border: 1px solid rgba(0,180,216,0.3);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 1.2rem; color: #00B4D8;
+    }
+
+    /* ─── TESTIMONIALS ───────────────────────────────────────────── */
+    .testimonial-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 28px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .testimonial-card:hover { border-color: rgba(0,180,216,0.25); transform: translateY(-3px); }
+    .stars { color: #f59e0b; font-size: 0.85rem; letter-spacing: 1px; }
+
+    /* ─── CONTACT ────────────────────────────────────────────────── */
+    .contact-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 28px;
+      display: flex; align-items: flex-start; gap: 16px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .contact-card:hover { border-color: rgba(0,180,216,0.3); transform: translateY(-3px); }
+    .contact-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(0,119,182,0.25), rgba(0,180,216,0.15));
+      border: 1px solid rgba(0,180,216,0.3);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: #00B4D8;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────── */
+    #footer {
+      background: linear-gradient(180deg, #0D1B2A 0%, #081220 100%);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-link { color: #64748b; font-size: 0.85rem; transition: color 0.25s; display: block; margin-bottom: 8px; text-decoration: none; }
+    .footer-link:hover { color: #00B4D8; }
+
+    /* ─── FLOATING WHATSAPP ──────────────────────────────────────── */
+    #float-wa {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: linear-gradient(135deg, #128C7E, #25D366);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; color: #fff;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.5);
+      text-decoration: none;
+      animation: floatPop 0.6s cubic-bezier(.23,1,.32,1) forwards;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    #float-wa:hover { transform: scale(1.12); box-shadow: 0 8px 36px rgba(37,211,102,0.65); }
+    #float-wa .wa-ring {
+      position: absolute; inset: -6px;
+      border-radius: 50%;
+      border: 2px solid rgba(37,211,102,0.4);
+      animation: waPing 2.5s ease-in-out infinite;
+    }
+    @keyframes waPing { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.25); opacity: 0; } }
+    @keyframes floatPop { from { transform: scale(0) rotate(-180deg); opacity: 0; } to { transform: scale(1) rotate(0deg); opacity: 1; } }
+
+    /* ─── MOBILE MENU ────────────────────────────────────────────── */
+    #mobile-menu {
+      display: none; flex-direction: column; gap: 4px;
+      background: rgba(13,27,42,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 16px 24px 20px;
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a {
+      padding: 12px 0;
+      font-size: 0.9rem; font-weight: 500;
+      color: #94a3b8;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: color 0.25s;
+      text-decoration: none;
+    }
+    #mobile-menu a:hover { color: #fff; }
+    #mobile-menu a:last-child { border-bottom: none; }
+
+    /* ─── ANIMATIONS ─────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+    .fade-up-1 { animation-delay: 0.1s; }
+    .fade-up-2 { animation-delay: 0.25s; }
+    .fade-up-3 { animation-delay: 0.4s; }
+    .fade-up-4 { animation-delay: 0.55s; }
+    .fade-up-5 { animation-delay: 0.7s; }
+
+    /* Scroll-reveal (JS adds .revealed) */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.revealed { opacity: 1; transform: translateY(0); }
+
+    /* ─── DIVIDER GRADIENT ───────────────────────────────────────── */
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(0,180,216,0.3), transparent); margin: 0; }
+
+    /* ─── LOGO MARK ──────────────────────────────────────────────── */
+    .logo-mark {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: linear-gradient(135deg, #0077B6, #00B4D8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: #fff; font-weight: 800; font-family: 'Syne', sans-serif;
+      box-shadow: 0 4px 12px rgba(0,119,182,0.4);
+    }
+
+    /* ─── CATEGORY COLOR BADGES ──────────────────────────────────── */
+    .badge-informatica  { background: rgba(99,102,241,0.25); color: #a5b4fc; }
+    .badge-web          { background: rgba(0,119,182,0.25); color: #67e8f9; }
+    .badge-marketing    { background: rgba(245,158,11,0.25); color: #fcd34d; }
+    .badge-redes        { background: rgba(37,211,102,0.25); color: #6ee7b7; }
+    .badge-gadgets      { background: rgba(236,72,153,0.25); color: #f9a8d4; }
+
+    /* ─── GRADIENT TEXT ──────────────────────────────────────────── */
+    .grad-text {
+      background: linear-gradient(135deg, #00B4D8 0%, #0077B6 50%, #00B4D8 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Hero float element */
+    .hero-float-card {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: flex; align-items: center; gap: 12px;
+      animation: heroCardFloat 4s ease-in-out infinite;
+    }
+    @keyframes heroCardFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* ─── RESPONSIVE GRID ────────────────────────────────────────── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    @media (max-width: 640px) { .cards-grid { grid-template-columns: 1fr; } }
+    @media (min-width: 641px) and (max-width: 1023px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .cards-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1280px) { .cards-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    /* ─── FILTER SCROLL ──────────────────────────────────────────── */
+    .filter-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 8px; }
+    .filter-scroll::-webkit-scrollbar { height: 3px; }
+    .filter-scroll::-webkit-scrollbar-thumb { background: rgba(0,119,182,0.4); border-radius: 2px; }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- HEADER / STICKY NAVBAR                                         -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<header id="navbar">
+  <nav class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-4">
+
+    <!-- Logo -->
+    <!-- <a href="#hero" class="flex items-center gap-3 flex-shrink-0 text-decoration-none">
+      <div class="logo-mark"></div> -->
+      <div>
+        <div style="font-family:'Syne',sans-serif; font-weight:800; font-size:1.05rem; color:#fff; line-height:1.1;">MozWave</div>
+        <div style="font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase; color:#00B4D8; font-weight:600; line-height:1.1;">Maputo</div>
+      </div>
+    </a>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center gap-7">
+      <a href="#servicos" class="nav-link">Serviços</a>
+      <a href="#como-funciona" class="nav-link">Como Funciona</a>
+      <a href="#depoimentos" class="nav-link">Depoimentos</a>
+      <a href="#contacto" class="nav-link">Contacto</a>
+    </div>
+
+    <!-- CTA + Hamburger -->
+    <div class="flex items-center gap-3">
+      <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank"
+         class="hidden sm:flex items-center gap-2 btn-whatsapp" style="padding:9px 18px; border-radius:10px; font-size:0.8rem; width:auto; background:linear-gradient(135deg,#128C7E,#25D366);">
+        <i class="fab fa-whatsapp"></i> <span>Falar Connosco</span>
+      </a>
+      <!-- Hamburger -->
+      <button id="hamburger" onclick="toggleMenu()" class="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-1.5 rounded-lg border border-white/10 bg-white/5" aria-label="Menu">
+        <span class="block w-5 h-0.5 bg-white/70 rounded transition-all duration-300" id="h-line1"></span>
+        <span class="block w-5 h-0.5 bg-white/70 rounded transition-all duration-300" id="h-line2"></span>
+        <span class="block w-4 h-0.5 bg-white/70 rounded transition-all duration-300" id="h-line3"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu">
+    <a href="#servicos" onclick="closeMenu()"><i class="fas fa-th-large mr-3 text-blue-400 opacity-70"></i>Serviços</a>
+    <a href="#como-funciona" onclick="closeMenu()"><i class="fas fa-route mr-3 text-cyan-400 opacity-70"></i>Como Funciona</a>
+    <a href="#depoimentos" onclick="closeMenu()"><i class="fas fa-star mr-3 text-yellow-400 opacity-70"></i>Depoimentos</a>
+    <a href="#contacto" onclick="closeMenu()"><i class="fas fa-phone mr-3 text-green-400 opacity-70"></i>Contacto</a>
+    <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" onclick="closeMenu()" style="color:#25D366!important;">
+      <i class="fab fa-whatsapp mr-3"></i>Falar pelo WhatsApp
+    </a>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- HERO SECTION                                                    -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 pt-24 pb-16 w-full relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 items-center min-h-screen" style="min-height: calc(100vh - 80px);">
+
+      <!-- Left: Text -->
+      <div>
+        <div class="badge-pill fade-up fade-up-1 mb-6">
+          <span class="badge-dot"></span>
+          Tecnologia em Maputo, Moçambique
+        </div>
+
+        <h1 class="fade-up fade-up-2" style="font-family:'Syne',sans-serif; font-size:clamp(2.2rem,5vw,3.8rem); font-weight:800; line-height:1.15; color:#fff; margin-bottom:20px;">
+          Soluções <span class="grad-text">Digitais</span><br/>que Fazem o seu<br/>Negócio Crescer
+        </h1>
+
+        <p class="fade-up fade-up-3" style="font-size:1.05rem; color:#94a3b8; line-height:1.75; max-width:520px; margin-bottom:32px;">
+          Informática, Websites, Marketing Digital, Gadgets e muito mais — tudo num só lugar. Servimos empresas e particulares em Maputo com excelência e preços acessíveis.
+        </p>
+
+        <div class="fade-up fade-up-4 flex flex-wrap gap-4 mb-12">
+          <a href="#servicos" class="btn-primary">
+            <span>Ver Todos os Serviços</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="#contacto" class="btn-ghost">
+            <i class="fas fa-phone-alt"></i>
+            <span>Falar Connosco</span>
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="fade-up fade-up-5 grid grid-cols-3 gap-4">
+          <div class="stat-card">
+            <div style="font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800; color:#00B4D8; line-height:1;">300+</div>
+            <div style="font-size:0.72rem; color:#64748b; margin-top:4px;">Clientes<br/>Satisfeitos</div>
+          </div>
+          <div class="stat-card">
+            <div style="font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800; color:#00B4D8; line-height:1;">5+</div>
+            <div style="font-size:0.72rem; color:#64748b; margin-top:4px;">Anos de<br/>Experiência</div>
+          </div>
+          <div class="stat-card">
+            <div style="font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800; color:#00B4D8; line-height:1;">24h</div>
+            <div style="font-size:0.72rem; color:#64748b; margin-top:4px;">Resposta<br/>Rápida</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Float Cards -->
+      <div class="hidden lg:flex flex-col gap-5 items-end">
+        <!-- Main visual -->
+        <div style="width:340px; border-radius:24px; overflow:hidden; border:1px solid rgba(255,255,255,0.1); box-shadow:0 40px 80px rgba(0,0,0,0.5); animation: heroCardFloat 5s ease-in-out infinite;">
+          <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=680&q=80"
+               alt="Tecnologia e Serviços Digitais em Maputo"
+               style="width:100%; height:220px; object-fit:cover; display:block;" loading="lazy" />
+          <div style="background:rgba(13,27,42,0.95); padding:20px;">
+            <div style="font-family:'Syne',sans-serif; font-weight:700; color:#fff; font-size:0.95rem;">Soluções Digitais Completas</div>
+            <div style="font-size:0.78rem; color:#64748b; margin-top:4px;">Para o seu negócio em Maputo</div>
+          </div>
+        </div>
+
+        <!-- Mini cards -->
+        <div class="hero-float-card" style="animation-delay:1s;">
+          <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#0077B6,#00B4D8);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">
+            <i class="fas fa-laptop-code" style="color:#fff;"></i>
+          </div>
+          <div>
+            <div style="font-weight:600;font-size:0.85rem;color:#fff;">Websites Modernos</div>
+            <div style="font-size:0.72rem;color:#64748b;">A partir de 5.000 MT</div>
+          </div>
+        </div>
+
+        <div class="hero-float-card" style="animation-delay:2.2s; align-self:flex-start; margin-left:40px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#128C7E,#25D366);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">
+            <i class="fab fa-whatsapp" style="color:#fff;"></i>
+          </div>
+          <div>
+            <div style="font-weight:600;font-size:0.85rem;color:#fff;">WhatsApp Business</div>
+            <div style="font-size:0.72rem;color:#64748b;">Configuração Profissional</div>
+          </div>
+        </div>
+
+        <div class="hero-float-card" style="animation-delay:0.5s;">
+          <div style="display:flex;gap:3px;">
+            <i class="fas fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+            <i class="fas fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+            <i class="fas fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+            <i class="fas fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+            <i class="fas fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+          </div>
+          <div style="font-size:0.78rem;color:#94a3b8;margin-left:4px;">"Excelente serviço!" – Cliente, Maputo</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Wave divider -->
+  <div style="position:absolute;bottom:0;left:0;right:0;z-index:1;">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:60px;">
+      <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#0D1B2A" opacity="0.5"/>
+      <path d="M0,40 C480,10 960,60 1440,40 L1440,60 L0,60 Z" fill="#0D1B2A"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- SERVICES / CARDS SECTION                                        -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="servicos" style="padding:80px 0 100px; position:relative; z-index:2;">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+    <!-- Section Header -->
+    <div class="text-center mb-12 reveal">
+      <div class="section-tag">Catálogo de Serviços & Produtos</div>
+      <h2 style="font-family:'Syne',sans-serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; color:#fff; margin-bottom:12px;">
+        O Que Oferecemos
+      </h2>
+      <p style="font-size:0.95rem; color:#64748b; max-width:520px; margin:0 auto; line-height:1.7;">
+        Explore o nosso catálogo completo de serviços digitais, informática e gadgets — com preços transparentes e atendimento personalizado.
+      </p>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="reveal filter-scroll mb-10">
+      <div class="flex gap-3 items-center" style="min-width:max-content; padding: 4px 2px;">
+        <button class="filter-btn active" onclick="filterCards('todos')" data-cat="todos">
+          <i class="fas fa-th-large" style="font-size:0.75rem;"></i> Todos
+        </button>
+        <button class="filter-btn" onclick="filterCards('informatica')" data-cat="informatica">
+          <i class="fas fa-desktop" style="font-size:0.75rem;"></i> Informática
+        </button>
+        <button class="filter-btn" onclick="filterCards('web')" data-cat="web">
+          <i class="fas fa-code" style="font-size:0.75rem;"></i> Web &amp; Sistemas
+        </button>
+        <button class="filter-btn" onclick="filterCards('marketing')" data-cat="marketing">
+          <i class="fas fa-bullhorn" style="font-size:0.75rem;"></i> Marketing Digital
+        </button>
+        <button class="filter-btn" onclick="filterCards('redes')" data-cat="redes">
+          <i class="fab fa-whatsapp" style="font-size:0.75rem;"></i> Redes Sociais
+        </button>
+        <button class="filter-btn" onclick="filterCards('gadgets')" data-cat="gadgets">
+          <i class="fas fa-mobile-alt" style="font-size:0.75rem;"></i> Gadgets
+        </button>
+      </div>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="cards-grid" id="cards-grid">
+
+      <!-- ── INFORMÁTICA ─────────────────────────────────── -->
+
+      <!-- Card 1: Formatação -->
+      <div class="card-item" data-category="informatica">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1588702547919-26089e690ecc?w=640&q=80" alt="Formatação de Computadores Maputo" loading="lazy" />
+            <span class="card-category-badge badge-informatica">Informática</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Formatação de Computadores</div>
+            <div class="card-desc">Formatação completa com instalação de sistema operativo, drivers e software essencial. Rápido e seguro.</div>
+            <!-- <div class="card-price">1.500 MT <small>/ por serviço</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Windows -->
+      <div class="card-item" data-category="informatica">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1610465299993-e6675c9f9efa?w=640&q=80" alt="Instalação Windows Maputo" loading="lazy" />
+            <span class="card-category-badge badge-informatica">Informática</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Instalação de Windows</div>
+            <div class="card-desc">Instalação original do Windows 10 ou 11 com activação, actualizações e configuração inicial completa.</div>
+            <!-- <div class="card-price">800 MT <small>/ por licença</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Office -->
+      <div class="card-item" data-category="informatica">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=640&q=80" alt="Instalação Office Maputo" loading="lazy" />
+            <span class="card-category-badge badge-informatica">Informática</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Instalação de Microsoft Office</div>
+            <div class="card-desc">Office 2019, 2021 ou Microsoft 365. Word, Excel, PowerPoint e Outlook prontos a usar.</div>
+            <!-- <div class="card-price">600 MT <small>/ instalação</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Vírus -->
+      <div class="card-item" data-category="informatica">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=640&q=80" alt="Limpeza de Vírus Maputo" loading="lazy" />
+            <span class="card-category-badge badge-informatica">Informática</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Remoção de Vírus & Malware</div>
+            <div class="card-desc">Diagnóstico completo, remoção de vírus, spyware e malware. O seu computador rápido e seguro novamente.</div>
+            <!-- <div class="card-price">700 MT <small>/ serviço</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5: Reparação -->
+      <div class="card-item" data-category="informatica">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=640&q=80" alt="Reparação PC Maputo" loading="lazy" />
+            <span class="card-category-badge badge-informatica">Informática</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Reparação de PCs & Laptops</div>
+            <div class="card-desc">Hardware, software, teclados, ecrãs, baterias, portas USB e muito mais. Orçamento grátis.</div>
+            <div class="card-price">Sob Consulta</div>
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6: Redes -->
+      <div class="card-item" data-category="informatica">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=640&q=80" alt="Configuração Redes Maputo" loading="lazy" />
+            <span class="card-category-badge badge-informatica">Informática</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Configuração de Redes</div>
+            <div class="card-desc">Wi-Fi empresarial, cablagem estruturada, roteadores, switches e segurança de rede para escritórios.</div>
+            <div class="card-price">Sob Consulta</div>
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7: Backup -->
+      <div class="card-item" data-category="informatica">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=640&q=80" alt="Backup Recuperação Dados Maputo" loading="lazy" />
+            <span class="card-category-badge badge-informatica">Informática</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Backup & Recuperação de Dados</div>
+            <div class="card-desc">Recuperação de ficheiros apagados, discos corrompidos ou formatados. Cloud backup para a sua empresa.</div>
+            <!-- <div class="card-price">1.200 MT <small>/ serviço</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── WEB & SISTEMAS ───────────────────────────────── -->
+
+      <!-- Card 8: Website Empresarial -->
+      <div class="card-item" data-category="web">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=640&q=80" alt="Criação de Websites Moçambique" loading="lazy" />
+            <span class="card-category-badge badge-web">Web & Sistemas</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Website Empresarial</div>
+            <div class="card-desc">Websites profissionais, modernos e responsivos para empresas em Moçambique. SEO incluído.</div>
+            <!-- <div class="card-price">5.000 MT <small>/ projecto</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 9: Landing Page -->
+      <div class="card-item" data-category="web">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=640&q=80" alt="Landing Page Moçambique" loading="lazy" />
+            <span class="card-category-badge badge-web">Web & Sistemas</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Landing Page de Vendas</div>
+            <div class="card-desc">Página de alta conversão focada em vendas, com botões de WhatsApp, formulários e design persuasivo.</div>
+            <!-- <div class="card-price">2.500 MT <small>/ projecto</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 10: Sistema Gestão -->
+      <div class="card-item" data-category="web">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=640&q=80" alt="Sistema Gestão Moçambique" loading="lazy" />
+            <span class="card-category-badge badge-web">Web & Sistemas</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Sistema de Gestão Empresarial</div>
+            <div class="card-desc">Software personalizado para controlo de stock, vendas, finanças e relatórios. Feito à medida.</div>
+            <!-- <div class="card-price">15.000 MT <small>/ projecto</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 11: Website Escola -->
+      <div class="card-item" data-category="web">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=640&q=80" alt="Website Escola Moçambique" loading="lazy" />
+            <span class="card-category-badge badge-web">Web & Sistemas</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Website para Escolas</div>
+            <div class="card-desc">Portal completo para escolas com gestão de turmas, notas, comunicados e área para pais.</div>
+            <!-- <div class="card-price">8.000 MT <small>/ projecto</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 12: Loja Online -->
+      <div class="card-item" data-category="web">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=640&q=80" alt="Loja Online Moçambique" loading="lazy" />
+            <span class="card-category-badge badge-web">Web & Sistemas</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Sistema para Loja Online</div>
+            <div class="card-desc">E-commerce completo com catálogo, carrinho, pagamentos Mpesa/eMola e gestão de encomendas.</div>
+            <!-- <div class="card-price">12.000 MT <small>/ projecto</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 13: Portfólio -->
+      <div class="card-item" data-category="web">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=640&q=80" alt="Portfólio Profissional Maputo" loading="lazy" />
+            <span class="card-category-badge badge-web">Web & Sistemas</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Portfólio Profissional</div>
+            <div class="card-desc">Mostre os seus trabalhos com um portfólio elegante. Perfeito para designers, fotógrafos e criativos.</div>
+            <!-- <div class="card-price">2.000 MT <small>/ projecto</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MARKETING DIGITAL ────────────────────────────── -->
+
+      <!-- Card 14: Facebook -->
+      <div class="card-item" data-category="marketing">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=640&q=80" alt="Gestão Facebook Maputo" loading="lazy" />
+            <span class="card-category-badge badge-marketing">Marketing Digital</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Gestão de Facebook Business</div>
+            <div class="card-desc">Criação de conteúdo, publicações diárias, resposta a comentários e crescimento de audiência.</div>
+            <!-- <div class="card-price">3.500 MT <small>/ mês</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 15: Instagram -->
+      <div class="card-item" data-category="marketing">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=640&q=80" alt="Gestão Instagram Maputo" loading="lazy" />
+            <span class="card-category-badge badge-marketing">Marketing Digital</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Gestão de Instagram</div>
+            <div class="card-desc">Feed estético, stories diários, reels criativos e estratégia de crescimento para o seu negócio.</div>
+            <!-- <div class="card-price">3.500 MT <small>/ mês</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 16: Tráfego Pago -->
+      <div class="card-item" data-category="marketing">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=640&q=80" alt="Tráfego Pago Facebook Ads" loading="lazy" />
+            <span class="card-category-badge badge-marketing">Marketing Digital</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Tráfego Pago (Facebook/Google Ads)</div>
+            <div class="card-desc">Campanhas de anúncios optimizadas para gerar vendas e clientes para o seu negócio rapidamente.</div>
+            <!-- <div class="card-price">4.500 MT <small>/ mês</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 17: Conteúdo -->
+      <div class="card-item" data-category="marketing">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=640&q=80" alt="Criação de Conteúdo Digital Maputo" loading="lazy" />
+            <span class="card-category-badge badge-marketing">Marketing Digital</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Criação de Conteúdo Digital</div>
+            <div class="card-desc">Designs profissionais, vídeos promocionais, banners e copywriting para as suas redes sociais.</div>
+            <!-- <div class="card-price">2.000 MT <small>/ pacote</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 18: Branding -->
+      <div class="card-item" data-category="marketing">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=640&q=80" alt="Branding Digital Maputo" loading="lazy" />
+            <span class="card-category-badge badge-marketing">Marketing Digital</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Branding Digital</div>
+            <div class="card-desc">Logótipo, identidade visual, paleta de cores e manual de marca para o seu negócio.</div>
+            <!-- <div class="card-price">3.000 MT <small>/ projecto</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── REDES SOCIAIS / WHATSAPP ─────────────────────── -->
+
+      <!-- Card 19: Catálogo WA -->
+      <div class="card-item" data-category="redes">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=640&q=80" alt="WhatsApp Business Catálogo Maputo" loading="lazy" />
+            <span class="card-category-badge badge-redes">Redes Sociais</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Configuração de Catálogo WA</div>
+            <div class="card-desc">Catálogo completo no WhatsApp Business com produtos, preços, fotos e descrições profissionais.</div>
+            <!-- <div class="card-price">800 MT <small>/ serviço</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 20: Automatização WA -->
+      <div class="card-item" data-category="redes">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=640&q=80" alt="Automatização WhatsApp Maputo" loading="lazy" />
+            <span class="card-category-badge badge-redes">Redes Sociais</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Automatização de WhatsApp</div>
+            <div class="card-desc">Chatbot, respostas automáticas, mensagens de boas-vindas e ausência personalizadas.</div>
+            <!-- <div class="card-price">1.500 MT <small>/ configuração</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 21: Integração WA -->
+      <div class="card-item" data-category="redes">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=640&q=80" alt="Integração WhatsApp Negócio" loading="lazy" />
+            <span class="card-category-badge badge-redes">Redes Sociais</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Integração WhatsApp no Website</div>
+            <div class="card-desc">Botão flutuante de WhatsApp no seu website para os clientes entrarem em contacto facilmente.</div>
+            <!-- <div class="card-price">500 MT <small>/ integração</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 22: Respostas Automáticas -->
+      <div class="card-item" data-category="redes">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=640&q=80" alt="Respostas Automáticas WhatsApp" loading="lazy" />
+            <span class="card-category-badge badge-redes">Redes Sociais</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Respostas Automáticas</div>
+            <div class="card-desc">Configure mensagens automáticas para FAQ, preços, localização e atendimento fora do horário.</div>
+            <!-- <div class="card-price">600 MT <small>/ configuração</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── GADGETS ──────────────────────────────────────── -->
+
+      <!-- Card 23: Smartwatch -->
+      <div class="card-item" data-category="gadgets">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=640&q=80" alt="Smartwatch Maputo" loading="lazy" />
+            <span class="card-category-badge badge-gadgets">Gadgets</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Smartwatch Desportivo</div>
+            <div class="card-desc">Relógio inteligente com monitor cardíaco, contagem de passos, notificações e bateria de longa duração.</div>
+            <!-- <div class="card-price">2.500 MT <small>/ unidade</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Encomendar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 24: Fones Bluetooth -->
+      <div class="card-item" data-category="gadgets">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=640&q=80" alt="Fones Bluetooth Maputo" loading="lazy" />
+            <span class="card-category-badge badge-gadgets">Gadgets</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Fones Bluetooth TWS</div>
+            <div class="card-desc">Auriculares sem fios com cancelamento de ruído, som HD e case de carregamento. Vários modelos.</div>
+            <!-- <div class="card-price">1.200 MT <small>/ unidade</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Encomendar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 25: Teclado -->
+      <div class="card-item" data-category="gadgets">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=640&q=80" alt="Teclado Gaming Maputo" loading="lazy" />
+            <span class="card-category-badge badge-gadgets">Gadgets</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Teclado Gaming RGB</div>
+            <div class="card-desc">Teclado mecânico ou de membrana com retroiluminação RGB e resposta rápida para gaming e trabalho.</div>
+            <!-- <div class="card-price">1.800 MT <small>/ unidade</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Encomendar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 26: Rato -->
+      <div class="card-item" data-category="gadgets">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=640&q=80" alt="Rato Gaming Wireless Maputo" loading="lazy" />
+            <span class="card-category-badge badge-gadgets">Gadgets</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Rato Wireless / Gaming</div>
+            <div class="card-desc">Rato óptico de alta precisão, sem fios, ergonómico. Ideal para trabalho e gaming profissional.</div>
+            <!-- <div class="card-price">900 MT <small>/ unidade</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Encomendar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 27: Pendrive -->
+      <div class="card-item" data-category="gadgets">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1618410320928-25228d811631?w=640&q=80" alt="Pendrive USB Maputo" loading="lazy" />
+            <span class="card-category-badge badge-gadgets">Gadgets</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Pendrives USB 3.0</div>
+            <div class="card-desc">Pendrives de alta velocidade USB 3.0. Capacidades 32GB, 64GB, 128GB e 256GB disponíveis.</div>
+            <!-- <div class="card-price">350 MT <small>/ unidade (32GB)</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Encomendar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 28: Capas -->
+      <div class="card-item" data-category="gadgets">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=640&q=80" alt="Capas Telemóvel Maputo" loading="lazy" />
+            <span class="card-category-badge badge-gadgets">Gadgets</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Capas Premium para Telemóvel</div>
+            <div class="card-desc">Capas de silicone, couro e armadura para iPhone, Samsung, Xiaomi, Tecno e outros modelos.</div>
+            <!-- <div class="card-price">250 MT <small>/ unidade</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Encomendar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 29: Perfume -->
+      <div class="card-item" data-category="gadgets">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://m.media-amazon.com/images/I/71HMn4VB+dL._AC_UF1000,1000_QL80_.jpg" alt="Perfume Importado Maputo" loading="lazy" />
+            <span class="card-category-badge badge-gadgets">Gadgets</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Perfumes Importados</div>
+            <div class="card-desc">Colecção de perfumes masculinos e femininos de marcas internacionais. Fragrâncias duradouras.</div>
+            <!-- <div class="card-price">1.500 MT <small>/ frasco 100ml</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Encomendar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 30: SMARTPHONES -->
+      <div class="card-item" data-category="gadgets">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="data:image/jpeg;base64,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" alt="iPhone 16 Maputo" loading="lazy" alt="Perfume Importado Maputo" loading="lazy" />
+            <span class="card-category-badge badge-gadgets">Gadgets</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">iPhone 16 – Preto Meia-Noite</div>
+            <div class="card-desc">iPhone 16 novo, selado, com caixa original. Câmara dupla 48MP, chip A18, iOS 18. Garantia 1 ano.</div>
+            <!-- <div class="card-price"> <small>/ </small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Encomendar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 31: Pendrive -->
+      <div class="card-item" data-category="gadgets">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="Assets/IPHONE1.jpg" alt="Pendrive USB Maputo" loading="lazy" />
+            <span class="card-category-badge badge-gadgets">Gadgets</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">iPhone 15 Pro Max – Titanium</div>
+            <div class="card-desc">iPhone 15 Pro Max 256GB, Titânio Negro. Câmara 48MP ProRAW, chip A17 Pro. Novo com caixa e garantia.</div>
+            <!-- <div class="card-price">350 MT <small>/ unidade (32GB)</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Encomendar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 32: Pendrive -->
+      <div class="card-item" data-category="gadgets">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="Assets/Samsung.jpg" alt="Pendrive USB Maputo" loading="lazy" />
+            <span class="card-category-badge badge-gadgets">Gadgets</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Samsung Galaxy S20+ 5G</div>
+            <div class="card-desc">Samsung S20+ 5G selado com garantia Samsung. 8GB RAM, 128GB, ecrã 6.7" AMOLED 120Hz. Câmara 64MP.</div>
+            <!-- <div class="card-price">350 MT <small>/ unidade (32GB)</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Encomendar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 32: Pendrive -->
+      <div class="card-item" data-category="gadgets">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="Assets/PC.jpg" alt="Pendrive USB Maputo" loading="lazy" />
+            <span class="card-category-badge badge-gadgets">Gadgets</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">MSI Gaming – Core i7 GTX</div>
+            <div class="card-desc">MSI Gaming 17.3" Core i7 10ª Gen, 16GB RAM, SSD NVMe, NVIDIA GTX / RTX. Teclado RGB SteelSeries. Ideal gaming e design.</div>
+            <!-- <div class="card-price">350 MT <small>/ unidade (32GB)</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Encomendar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 32: Pendrive -->
+      <div class="card-item" data-category="gadgets">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://preview.redd.it/whats-the-greatest-movie-sequel-of-all-time-v0-9kfzchn56rmf1.jpeg?width=640&crop=smart&auto=webp&s=33bf2de418045487853b0f0a30e12892c8d20d94" alt="Pendrive USB Maputo" loading="lazy" />
+            <span class="card-category-badge badge-gadgets">Gadgets</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Filmes HD & 4K – Pacotes</div>
+            <div class="card-desc">Mais de 500 filmes disponíveis: Acção, Drama, Comédia, Animação, Terror. Em pendrive ou link de download. 🎬</div>
+            <!-- <div class="card-price">350 MT <small>/ unidade (32GB)</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Encomendar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 32: Pendrive -->
+      <div class="card-item" data-category="gadgets">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://cdn.manualdohomem.com.br/?w=1233&h=772&key=aHR0cHM6Ly9tYW51YWxkb2hvbWVtbW9kZXJuby5jb20uYnI=&u=%2Ffiles%2F2019%2F01%2F30-melhores-series-originais-netflix-30-melhores-series-originais-netflix-7.jpg" alt="Pendrive USB Maputo" loading="lazy" />
+            <span class="card-category-badge badge-gadgets">Gadgets</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Séries – Temporadas Completas</div>
+            <div class="card-desc">Breaking Bad, Game of Thrones, Money Heist, Stranger Things, The Boys, Squid Game e muito mais. Em pendrive.</div>
+            <!-- <div class="card-price">350 MT <small>/ unidade (32GB)</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Encomendar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 32: Pendrive -->
+      <div class="card-item" data-category="gadgets">
+        <div class="service-card h-full">
+          <div class="card-img-wrap">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc4Xx8wzoeMtJhL28eJ9fnY7RfWrz2qMjUYw&s" alt="Pendrive USB Maputo" loading="lazy" />
+            <span class="card-category-badge badge-gadgets">Gadgets</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">K-Dramas & Doramas Coreanos</div>
+            <div class="card-desc">Crash Landing on You, Goblin, My Love from the Star, Business Proposal, Vincenzo e 200+ títulos. Legendas em PT!</div>
+            <!-- <div class="card-price">350 MT <small>/ unidade (32GB)</small></div> -->
+            <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Encomendar via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /cards-grid -->
+
+    <!-- Empty state (shown when no results) -->
+    <div id="no-results" style="display:none; text-align:center; padding:60px 0;">
+      <div style="font-size:3rem; margin-bottom:16px;">🔍</div>
+      <div style="font-family:'Syne',sans-serif; font-size:1.2rem; color:#94a3b8;">Nenhum serviço nesta categoria.</div>
+      <button onclick="filterCards('todos')" class="btn-primary" style="margin-top:20px; border:none;"><span>Ver Todos</span></button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- DIVIDER -->
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- HOW IT WORKS                                                    -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="como-funciona" style="padding:80px 0;">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+    <div class="text-center mb-12 reveal">
+      <div class="section-tag">Processo Simples</div>
+      <h2 style="font-family:'Syne',sans-serif; font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800; color:#fff; margin-bottom:10px;">Como Funciona</h2>
+      <p style="font-size:0.9rem; color:#64748b; max-width:420px; margin:0 auto;">Em apenas 4 passos simples, o seu serviço está em andamento.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="step-card reveal" style="transition-delay:0.1s;">
+        <div class="step-number">01</div>
+        <div class="step-icon"><i class="fab fa-whatsapp"></i></div>
+        <h3 style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-bottom:8px;">Contacte-nos</h3>
+        <p style="font-size:0.82rem; color:#64748b; line-height:1.6;">Envie uma mensagem via WhatsApp ou ligue. Resposta em menos de 1 hora.</p>
+      </div>
+      <div class="step-card reveal" style="transition-delay:0.2s;">
+        <div class="step-number">02</div>
+        <div class="step-icon"><i class="fas fa-comments"></i></div>
+        <h3 style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-bottom:8px;">Consulta Grátis</h3>
+        <p style="font-size:0.82rem; color:#64748b; line-height:1.6;">Analisamos as suas necessidades e apresentamos uma proposta detalhada sem custos.</p>
+      </div>
+      <div class="step-card reveal" style="transition-delay:0.3s;">
+        <div class="step-number">03</div>
+        <div class="step-icon"><i class="fas fa-tools"></i></div>
+        <h3 style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-bottom:8px;">Execução</h3>
+        <p style="font-size:0.82rem; color:#64748b; line-height:1.6;">A nossa equipa executa o serviço com qualidade, nos prazos acordados e com acompanhamento.</p>
+      </div>
+      <div class="step-card reveal" style="transition-delay:0.4s;">
+        <div class="step-number">04</div>
+        <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+        <h3 style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:#fff; margin-bottom:8px;">Entrega & Suporte</h3>
+        <p style="font-size:0.82rem; color:#64748b; line-height:1.6;">Entregamos o resultado final e oferecemos suporte pós-serviço para sua total satisfação.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- DIVIDER -->
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- BANNER CTA                                                      -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section style="padding:60px 0; position:relative; overflow:hidden;">
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,119,182,0.2) 0%,rgba(0,180,216,0.08) 100%);"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,119,182,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,119,182,0.05) 1px,transparent 1px);background-size:36px 36px;"></div>
+  <div class="max-w-4xl mx-auto px-5 sm:px-8 text-center reveal" style="position:relative;z-index:1;">
+    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;color:#fff;margin-bottom:16px;">
+      Pronto para Digitalizar o seu Negócio?
+    </h2>
+    <p style="font-size:0.95rem;color:#94a3b8;margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.7;">
+      Fale connosco agora e receba uma proposta personalizada sem compromisso. Estamos em Maputo!
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" class="btn-whatsapp" style="width:auto;padding:14px 32px;font-size:0.95rem;border-radius:12px;">
+        <i class="fab fa-whatsapp"></i> Receber Proposta Gratuita
+      </a>
+      <a href="#servicos" class="btn-ghost">
+        <i class="fas fa-eye"></i> Ver Todos os Serviços
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- DIVIDER -->
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- TESTIMONIALS                                                    -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="depoimentos" style="padding:80px 0;">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+    <div class="text-center mb-12 reveal">
+      <div class="section-tag">Depoimentos</div>
+      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:#fff;margin-bottom:10px;">O Que Dizem os Nossos Clientes</h2>
+      <p style="font-size:0.9rem;color:#64748b;max-width:400px;margin:0 auto;">Mais de 300 clientes satisfeitos em Maputo e arredores.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="testimonial-card reveal" style="transition-delay:0.1s;">
+        <div class="stars mb-3">★★★★★</div>
+        <p style="font-size:0.88rem;color:#94a3b8;line-height:1.7;margin-bottom:20px;">"Criaram o website da minha empresa em 5 dias. Profissional, moderno e com WhatsApp integrado. Os clientes adoram! Recomendo a toda a gente em Maputo."</p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#0077B6,#00B4D8);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;flex-shrink:0;">C</div>
+          <div>
+            <div style="font-weight:600;font-size:0.88rem;color:#fff;">Carlos Mondlane</div>
+            <div style="font-size:0.75rem;color:#64748b;">Dono de Restaurante, Maputo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal" style="transition-delay:0.2s;">
+        <div class="stars mb-3">★★★★★</div>
+        <p style="font-size:0.88rem;color:#94a3b8;line-height:1.7;margin-bottom:20px;">"Geri as minhas redes sociais durante 3 meses e as vendas dobraram. A equipa é muito dedicada e criativa. O melhor investimento que fiz para o meu negócio."</p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;flex-shrink:0;">A</div>
+          <div>
+            <div style="font-weight:600;font-size:0.88rem;color:#fff;">Anita Cossa</div>
+            <div style="font-size:0.75rem;color:#64748b;">Loja de Moda, Sommerschield</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal" style="transition-delay:0.3s;">
+        <div class="stars mb-3">★★★★★</div>
+        <p style="font-size:0.88rem;color:#94a3b8;line-height:1.7;margin-bottom:20px;">"Formataram o meu laptop em 1 hora e ainda instalaram todos os softwares que precisava. Preço justo e trabalho impecável. Já os recomendei a vários colegas."</p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#ef4444);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;flex-shrink:0;">J</div>
+          <div>
+            <div style="font-weight:600;font-size:0.88rem;color:#fff;">João Sitoe</div>
+            <div style="font-size:0.75rem;color:#64748b;">Advogado, Matola</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal" style="transition-delay:0.4s;">
+        <div class="stars mb-3">★★★★★</div>
+        <p style="font-size:0.88rem;color:#94a3b8;line-height:1.7;margin-bottom:20px;">"O sistema de gestão transformou completamente a minha loja. Agora controlo o stock, vendas e finanças num único lugar. Imprescindível para qualquer negócio."</p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;flex-shrink:0;">M</div>
+          <div>
+            <div style="font-weight:600;font-size:0.88rem;color:#fff;">Maria Nhantumbo</div>
+            <div style="font-size:0.75rem;color:#64748b;">Comerciante, Mercado Central</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal" style="transition-delay:0.5s;">
+        <div class="stars mb-3">★★★★★</div>
+        <p style="font-size:0.88rem;color:#94a3b8;line-height:1.7;margin-bottom:20px;">"Comprei um smartwatch e fones Bluetooth. A qualidade é incrível para o preço. Entregaram em casa no mesmo dia. Já sou cliente fiel e voltarei certamente."</p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#8b5cf6);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;flex-shrink:0;">L</div>
+          <div>
+            <div style="font-weight:600;font-size:0.88rem;color:#fff;">Lúcia Tembe</div>
+            <div style="font-size:0.75rem;color:#64748b;">Estudante Universitária, Maputo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal" style="transition-delay:0.6s;">
+        <div class="stars mb-3">★★★★★</div>
+        <p style="font-size:0.88rem;color:#94a3b8;line-height:1.7;margin-bottom:20px;">"Configuraram a nossa rede de escritório e resolveram todos os problemas de conectividade. Trabalho muito profissional, pontual e a preços competitivos."</p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#0077B6,#6366f1);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;flex-shrink:0;">F</div>
+          <div>
+            <div style="font-weight:600;font-size:0.88rem;color:#fff;">Fernando Bila</div>
+            <div style="font-size:0.75rem;color:#64748b;">Director de ONG, Maputo</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- DIVIDER -->
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- CONTACT SECTION                                                 -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="contacto" style="padding:80px 0;">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+
+      <!-- Left: Info -->
+      <div>
+        <div class="section-tag reveal">Fale Connosco</div>
+        <h2 class="reveal" style="font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:#fff;margin-bottom:12px;margin-top:12px;">
+          Estamos Aqui para Ajudar
+        </h2>
+        <p class="reveal" style="font-size:0.93rem;color:#64748b;line-height:1.75;margin-bottom:36px;max-width:440px;">
+          Seja para um orçamento, suporte técnico ou apenas uma dúvida — a nossa equipa está disponível todos os dias para si.
+        </p>
+
+        <div class="flex flex-col gap-4">
+          <div class="contact-card reveal" style="transition-delay:0.1s;">
+            <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+            <div>
+              <div style="font-weight:600;font-size:0.9rem;color:#fff;margin-bottom:4px;">WhatsApp</div>
+              <div style="font-size:0.82rem;color:#64748b;">+258 87 921 6008</div>
+              <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" style="font-size:0.78rem;color:#25D366;text-decoration:none;margin-top:4px;display:block;">Enviar mensagem →</a>
+            </div>
+          </div>
+
+          <div class="contact-card reveal" style="transition-delay:0.2s;">
+            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+            <div>
+              <div style="font-weight:600;font-size:0.9rem;color:#fff;margin-bottom:4px;">Telefone</div>
+              <div style="font-size:0.82rem;color:#64748b;">+258 87 921 6008</div>
+              <div style="font-size:0.75rem;color:#64748b;margin-top:2px;">Seg–Sáb: 8h00–18h00</div>
+            </div>
+          </div>
+
+          <div class="contact-card reveal" style="transition-delay:0.3s;">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <div style="font-weight:600;font-size:0.9rem;color:#fff;margin-bottom:4px;">Email</div>
+              <div style="font-size:0.82rem;color:#64748b;">fredericochirruco05@gmail.com</div>
+            </div>
+          </div>
+
+          <div class="contact-card reveal" style="transition-delay:0.4s;">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <!-- <div style="font-weight:600;font-size:0.9rem;color:#fff;margin-bottom:4px;">Localização</div>
+              <div style="font-size:0.82rem;color:#64748b;">Av. Julius Nyerere, Maputo, Moçambique</div> -->
+              <div style="font-size:0.75rem;color:#64748b;margin-top:2px;">Atendimento ao domicílio disponível</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Quick Contact Box -->
+      <div class="reveal" style="transition-delay:0.2s;">
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:36px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,180,216,0.4),transparent);"></div>
+
+          <h3 style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:#fff;margin-bottom:6px;">Orçamento Rápido</h3>
+          <p style="font-size:0.82rem;color:#64748b;margin-bottom:28px;">Diga-nos o que precisa e respondemos em minutos via WhatsApp.</p>
+
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div>
+              <label style="font-size:0.78rem;font-weight:600;color:#94a3b8;letter-spacing:0.04em;display:block;margin-bottom:8px;">NOME COMPLETO</label>
+              <input type="text" id="inp-nome" placeholder="Ex: Carlos Mondlane" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 14px;color:#fff;font-size:0.88rem;outline:none;transition:border-color 0.25s;font-family:'Outfit',sans-serif;" onfocus="this.style.borderColor='rgba(0,180,216,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+            </div>
+            <div>
+              <label style="font-size:0.78rem;font-weight:600;color:#94a3b8;letter-spacing:0.04em;display:block;margin-bottom:8px;">NÚMERO DE TELEFONE</label>
+              <input type="tel" id="inp-tel" placeholder="+258 84 000 0000" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 14px;color:#fff;font-size:0.88rem;outline:none;transition:border-color 0.25s;font-family:'Outfit',sans-serif;" onfocus="this.style.borderColor='rgba(0,180,216,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+            </div>
+            <div>
+              <label style="font-size:0.78rem;font-weight:600;color:#94a3b8;letter-spacing:0.04em;display:block;margin-bottom:8px;">SERVIÇO DESEJADO</label>
+              <select id="inp-servico" style="width:100%;background:rgba(13,27,42,0.9);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 14px;color:#94a3b8;font-size:0.88rem;outline:none;transition:border-color 0.25s;font-family:'Outfit',sans-serif;" onfocus="this.style.borderColor='rgba(0,180,216,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+                <option value="">Seleccione um serviço...</option>
+                <option value="Informática (Formatação%2C Reparação%2C etc)">Informática (Formatação, Reparação...)</option>
+                <option value="Website ou Landing Page">Website ou Landing Page</option>
+                <option value="Sistema de Gestão">Sistema de Gestão</option>
+                <option value="Marketing Digital">Marketing Digital</option>
+                <option value="WhatsApp Business">WhatsApp Business</option>
+                <option value="Gadgets e Acessórios">Gadgets e Acessórios</option>
+                <option value="Outro Serviço">Outro Serviço</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-size:0.78rem;font-weight:600;color:#94a3b8;letter-spacing:0.04em;display:block;margin-bottom:8px;">MENSAGEM (OPCIONAL)</label>
+              <textarea id="inp-msg" rows="3" placeholder="Descreva brevemente o que precisa..." style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 14px;color:#fff;font-size:0.88rem;outline:none;transition:border-color 0.25s;font-family:'Outfit',sans-serif;resize:vertical;" onfocus="this.style.borderColor='rgba(0,180,216,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'"></textarea>
+            </div>
+            <button onclick="enviarOrcamento()" class="btn-whatsapp" style="margin-top:4px;font-size:0.95rem;padding:14px;">
+              <i class="fab fa-whatsapp"></i> Enviar pelo WhatsApp
+            </button>
+          </div>
+
+          <p style="font-size:0.72rem;color:#334155;text-align:center;margin-top:16px;">
+            <i class="fas fa-lock" style="margin-right:4px;"></i> Os seus dados são privados e nunca partilhados.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- DIVIDER -->
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- FOOTER                                                          -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<footer id="footer">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 pt-12 pb-6">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+
+      <!-- Brand -->
+      <div class="lg:col-span-1">
+        <div class="flex items-center gap-3 mb-4">
+          <!-- <div class="logo-mark">TZ</div> -->
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:#fff;line-height:1.1;">MozWave</div>
+            <div style="font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:#00B4D8;font-weight:600;">Maputo</div>
+          </div>
+        </div>
+        <p style="font-size:0.82rem;color:#475569;line-height:1.7;margin-bottom:16px;">
+          Tecnologia ao alcance de todos em Maputo. Soluções digitais modernas para pequenas e médias empresas.
+        </p>
+        <div style="display:flex;gap:10px;">
+          <a href="#" style="width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#64748b;font-size:0.85rem;text-decoration:none;transition:all 0.25s;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(0,180,216,0.4)';" onmouseout="this.style.color='#64748b';this.style.borderColor='rgba(255,255,255,0.08)';"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" style="width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#64748b;font-size:0.85rem;text-decoration:none;transition:all 0.25s;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(0,180,216,0.4)';" onmouseout="this.style.color='#64748b';this.style.borderColor='rgba(255,255,255,0.08)';"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/message/275TG6URP4FOB1" target="_blank" style="width:34px;height:34px;border-radius:8px;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.2);display:flex;align-items:center;justify-content:center;color:#25D366;font-size:0.85rem;text-decoration:none;transition:all 0.25s;"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;color:#fff;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px;">Serviços</div>
+        <a href="#servicos" onclick="filterCards('informatica')" class="footer-link">Informática</a>
+        <a href="#servicos" onclick="filterCards('web')" class="footer-link">Web & Sistemas</a>
+        <a href="#servicos" onclick="filterCards('marketing')" class="footer-link">Marketing Digital</a>
+        <a href="#servicos" onclick="filterCards('redes')" class="footer-link">Redes Sociais</a>
+        <a href="#servicos" onclick="filterCards('gadgets')" class="footer-link">Gadgets</a>
+      </div>
+
+      <!-- Pages -->
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;color:#fff;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px;">Empresa</div>
+        <a href="#hero" class="footer-link">Início</a>
+        <a href="#como-funciona" class="footer-link">Como Funciona</a>
+        <a href="#depoimentos" class="footer-link">Depoimentos</a>
+        <a href="#contacto" class="footer-link">Contacto</a>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;color:#fff;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px;">Contactos</div>
+        <div style="font-size:0.82rem;color:#475569;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><i class="fab fa-whatsapp" style="color:#25D366;"></i> +258 87 921 6008</div>
+        <div style="font-size:0.82rem;color:#475569;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><i class="fas fa-envelope" style="color:#0077B6;"></i> fredericochirruco05@gmail.com</div>
+        <!-- <div style="font-size:0.82rem;color:#475569;margin-bottom:8px;display:flex;align-items:flex-start;gap:8px;"><i class="fas fa-map-marker-alt" style="color:#0077B6;margin-top:2px;"></i> Av. Julius Nyerere, Maputo</div> -->
+        <div style="font-size:0.75rem;color:#334155;margin-top:12px;padding:8px 12px;background:rgba(0,119,182,0.08);border-radius:8px;border:1px solid rgba(0,119,182,0.15);">
+          <i class="fas fa-clock" style="color:#00B4D8;margin-right:6px;"></i> Seg–Sáb: 8h–18h
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="divider" style="margin-bottom:20px;"></div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;">
+      <div style="font-size:0.75rem;color:#334155;">
+        © 2025 MozWave Maputo. Todos os direitos reservados.
+      </div>
+      <div style="font-size:0.75rem;color:#334155;">
+        Feito com <span style="color:#ef4444;">♥</span> em Maputo, Moçambique
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- FLOATING WHATSAPP BUTTON                                        -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<a id="float-wa" href="https://wa.me/message/275TG6URP4FOB1" target="_blank" aria-label="Contactar via WhatsApp">
+  <div class="wa-ring"></div>
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- JAVASCRIPT                                                      -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<script>
+
+  /* ──────────────────────────────────────────────────────────────
+     STICKY NAVBAR: adiciona classe ao fazer scroll
+  ────────────────────────────────────────────────────────────── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+
+  /* ──────────────────────────────────────────────────────────────
+     HAMBURGER MENU TOGGLE
+  ────────────────────────────────────────────────────────────── */
+  const mobileMenu = document.getElementById('mobile-menu');
+  let menuOpen = false;
+
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('open', menuOpen);
+    // Animate hamburger lines
+    const l1 = document.getElementById('h-line1');
+    const l2 = document.getElementById('h-line2');
+    const l3 = document.getElementById('h-line3');
+    if (menuOpen) {
+      l1.style.transform = 'translateY(8px) rotate(45deg)';
+      l2.style.opacity = '0';
+      l3.style.transform = 'translateY(-8px) rotate(-45deg)';
+      l3.style.width = '20px';
+    } else {
+      l1.style.transform = '';
+      l2.style.opacity = '1';
+      l3.style.transform = '';
+      l3.style.width = '16px';
+    }
+  }
+
+  function closeMenu() {
+    if (menuOpen) toggleMenu();
+  }
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (menuOpen && !navbar.contains(e.target)) closeMenu();
+  });
+
+
+  /* ──────────────────────────────────────────────────────────────
+     CATEGORY FILTER
+  ────────────────────────────────────────────────────────────── */
+  function filterCards(category) {
+    // Update button states
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.cat === category);
+    });
+
+    // Filter cards
+    const cards = document.querySelectorAll('.card-item');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const cardCat = card.dataset.category;
+      const show = category === 'todos' || cardCat === category;
+
+      if (show) {
+        card.classList.remove('hidden');
+        visibleCount++;
+        // Stagger animation
+        requestAnimationFrame(() => {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 30);
+        });
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    // Show empty state if no results
+    document.getElementById('no-results').style.display = visibleCount === 0 ? 'block' : 'none';
+
+    // Smooth scroll to section
+    document.getElementById('servicos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+
+  /* ──────────────────────────────────────────────────────────────
+     SEND QUOTE VIA WHATSAPP (Contact Form)
+  ────────────────────────────────────────────────────────────── */
+  function enviarOrcamento() {
+    const nome    = document.getElementById('inp-nome').value.trim();
+    const tel     = document.getElementById('inp-tel').value.trim();
+    const servico = document.getElementById('inp-servico').value;
+    const msg     = document.getElementById('inp-msg').value.trim();
+
+    if (!nome || !tel || !servico) {
+      // Simple inline error highlighting
+      if (!nome) {
+        document.getElementById('inp-nome').style.borderColor = 'rgba(239,68,68,0.6)';
+        setTimeout(() => document.getElementById('inp-nome').style.borderColor = 'rgba(255,255,255,0.1)', 2000);
+      }
+      if (!tel) {
+        document.getElementById('inp-tel').style.borderColor = 'rgba(239,68,68,0.6)';
+        setTimeout(() => document.getElementById('inp-tel').style.borderColor = 'rgba(255,255,255,0.1)', 2000);
+      }
+      if (!servico) {
+        document.getElementById('inp-servico').style.borderColor = 'rgba(239,68,68,0.6)';
+        setTimeout(() => document.getElementById('inp-servico').style.borderColor = 'rgba(255,255,255,0.1)', 2000);
+      }
+      return;
+    }
+
+    const texto = `Olá MozWave Maputo!%0A%0ANome: ${encodeURIComponent(nome)}%0ATelefone: ${encodeURIComponent(tel)}%0AServiço: ${encodeURIComponent(servico)}${msg ? '%0AMensagem: ' + encodeURIComponent(msg) : ''}%0A%0AAguardo o vosso contacto. Obrigado!`;
+    window.open(`https://wa.me/message/275TG6URP4FOB1?text=${texto}`, '_blank');
+  }
+
+
+  /* ──────────────────────────────────────────────────────────────
+     SCROLL REVEAL ANIMATION (Intersection Observer)
+  ────────────────────────────────────────────────────────────── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+
+  /* ──────────────────────────────────────────────────────────────
+     LAZY LOADING IMAGES (native + fallback)
+  ────────────────────────────────────────────────────────────── */
+  // Native lazy loading is already set with loading="lazy"
+  // Additional: Intersection Observer for older browsers
+  if ('IntersectionObserver' in window) {
+    const imgObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+          }
+          imgObserver.unobserve(img);
+        }
+      });
+    }, { rootMargin: '200px' });
+
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => imgObserver.observe(img));
+  }
+
+
+  /* ──────────────────────────────────────────────────────────────
+     SMOOTH ANCHOR SCROLL (override for nav links)
+  ────────────────────────────────────────────────────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+
+  /* ──────────────────────────────────────────────────────────────
+     COUNTER ANIMATION for stats in Hero
+  ────────────────────────────────────────────────────────────── */
+  // Triggered on first scroll
+  let countersStarted = false;
+  function animateCounter(el, target, suffix = '') {
+    let start = 0;
+    const duration = 1800;
+    const step = Math.ceil(target / (duration / 16));
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { start = target; clearInterval(timer); }
+      el.textContent = start + suffix;
+    }, 16);
+  }
+
+  const statObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !countersStarted) {
+      countersStarted = true;
+      const stats = document.querySelectorAll('.stat-card > div:first-child');
+      const values = [300, 5, 24];
+      const suffixes = ['+', '+', 'h'];
+      stats.forEach((el, i) => animateCounter(el, values[i], suffixes[i]));
+    }
+  }, { threshold: 0.5 });
+
+  const firstStat = document.querySelector('.stat-card');
+  if (firstStat) statObserver.observe(firstStat);
+
+
+  /* ──────────────────────────────────────────────────────────────
+     PLACEHOLDER IMAGE FALLBACK
+  ────────────────────────────────────────────────────────────── */
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('error', function() {
+      // Generate a gradient placeholder based on card category
+      const card = this.closest('.card-item');
+      const cat = card ? card.dataset.category : 'default';
+      const gradients = {
+        informatica: 'linear-gradient(135deg,#1e3a5f,#0077B6)',
+        web:         'linear-gradient(135deg,#0c2d48,#00B4D8)',
+        marketing:   'linear-gradient(135deg,#3d1a00,#f59e0b)',
+        redes:       'linear-gradient(135deg,#0a2e1a,#25D366)',
+        gadgets:     'linear-gradient(135deg,#2d0a2e,#ec4899)',
+      };
+      const parent = this.parentElement;
+      parent.style.background = gradients[cat] || 'linear-gradient(135deg,#112236,#0D1B2A)';
+      parent.style.display = 'flex';
+      parent.style.alignItems = 'center';
+      parent.style.justifyContent = 'center';
+      this.style.opacity = '0';
+    });
+  });
+
+</script>
+
+</body>
+</html>
